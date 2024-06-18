@@ -7,6 +7,7 @@
 
 extern map<string, Card*> allclasses;
 
+
 CardManager::~CardManager(){
     vector<Card*>::iterator iter;
     for (iter = myclasses.begin(); iter != myclasses.end(); ++iter) {
@@ -15,9 +16,14 @@ CardManager::~CardManager(){
 }
 
 void CardManager::printAll(){
+    double temp = 0;
     for (int i=0; i<myclasses.size(); i++){
         cout << i+1 << " | " << myclasses[i]->toString() << endl;
+        temp+=myclasses[i]->getCredit()*myclasses[i]->getScore();
     }
+    gpa=temp/total_credit;
+    cout<<"Total "<<count<<" classes, "<<total_credit<<" credits, GPA ";
+    printf("%.1f\n",gpa);
 }
 
 void CardManager::addCard(){
@@ -25,10 +31,21 @@ void CardManager::addCard(){
 	cout << ">> Enter class code > ";
 	cin >> code;
     if(allclasses.count(code)>0){
+        for(int i = 0 ; i <count ; i++){
+            if(myclasses[i]->getCode()==code){
+                cout<<"The Card of "<<code<<" already exists."<<endl;
+                return;
+            }
+        }
         cout << allclasses[code]->toStringShort() << endl;
 	    cout << ">> Enter grade > ";
 	    cin >> grade;
+        if(grade!="A+"&&grade!="A0"&&grade!="B+"&&grade!="B0"&&grade!="C+"&&grade!="C0"&&grade!="D+"&&grade!="D0"&&grade!="F"){
+            cout<<"Wrong grade!"<<endl;
+            return;
+        }
         Card* new_card = new Card(allclasses[code], grade);
+        
         myclasses.push_back(new_card);
         count++;
         total_credit += new_card->getCredit();

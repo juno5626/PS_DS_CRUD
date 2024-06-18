@@ -1,0 +1,5 @@
+1 | ECE10002 [3]C_Programming A+ 4.5
+2 | ECE10004 [2]Introduction_CSEE A0 4
+3 | ECE10005 [1]Coding_Studio B+ 3.5
+4 | ECE10020 [3]Engineering_Design A+ 4.5
+Total 4 classes, 9 credits, GPA 4.27778
